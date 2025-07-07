@@ -87,7 +87,7 @@ for (i in 1:nrow(eic_data)) {
   }
 }
 
----#loading summary file----
+#---#loading summary file----
 file_path <- "load_entsoe.xlsx"
 years <- 2020:2025
 
