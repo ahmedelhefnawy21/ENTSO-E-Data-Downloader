@@ -1,30 +1,36 @@
-name: Run ENTSO-E pipeline scripts        # shows in Actions tab
+name: Run ENTSO-E pipeline scripts          # appears in the Actions list
 
 on:
-  push:                                   # every commit / PR
+  push:                                     # every commit / PR
   schedule:
-    - cron:  '0 3 * * 1'                  # Monday 03:00 UTC
+    - cron: '0 3 * * 1'                     # Monday 03:00 UTC
+  workflow_dispatch:                        # manual “Run workflow” button
 
-env:                                      
+env:                                        # makes the token visible to R
   ENTSOE_PAT: ${{ secrets.ENTSOE_PAT }}
 
 jobs:
-  run:
-    runs-on: ubuntu-latest
+  pipeline:
+    runs-on: ubuntu-latest                  # GitHub-hosted Linux VM
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4           # fetch repository code
 
-      - name: Set up R
-        uses: r-lib/actions/setup-r@v2
+      # 1) Set up R (adds /opt/R/4.x to PATH, installs pandoc, etc.)
+      - uses: r-lib/actions/setup-r@v2
 
-      - name: Install dependencies
-        run: |
-          install.packages(c(
-            "entsoeapi","openxlsx","dplyr","tidyr","lubridate"
-          ))
+      # 2) Install and cache R package dependencies
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            entsoeapi
+            openxlsx
+            dplyr
+            tidyr
+            lubridate
 
-      - name: Execute scripts (5-min cap each)
+      # 3) Run each script with a 5-minute safety cap
+      - name: Execute pipeline scripts
         run: |
           timeout 300 Rscript scripts/entsoe_capacity.R
           timeout 300 Rscript scripts/entsoe_load.R
