@@ -23,7 +23,7 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-            krose/entsoeapi
+            krose/entsoeapi@v0.8.0.0
             openxlsx
             dplyr
             tidyr
