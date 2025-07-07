@@ -16,17 +16,23 @@ jobs:
       - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-r@v2
 
-      - name: Install entsoeapi & deps
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev
+
+      - name: Install entsoeapi & dependencies
         run: |
           Rscript -e "install.packages(
-                        c('openxlsx','dplyr','tidyr','lubridate',
-                          'readxl','tibble','writexl','remotes'),
+                        c('openxlsx', 'dplyr', 'tidyr', 'lubridate',
+                          'readxl', 'tibble', 'writexl', 'remotes',
+                          'httr', 'xmlconvert', 'curl'),
                         repos = 'https://cloud.r-project.org'
                       )"
           Rscript -e "remotes::install_github(
                         'krose/entsoeapi',
                         ref = 'master',
-                        dependencies = TRUE
+                        dependencies = FALSE
                       )"
           Rscript -e "library(entsoeapi); message('entsoeapi version: ', packageVersion('entsoeapi'))"
 
