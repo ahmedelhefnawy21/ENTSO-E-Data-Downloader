@@ -1,6 +1,4 @@
 ## 1) SETUP -------------------------------------------------------------------
-setwd("YOUR_WORKING_DIRECTORY")
-
 library(entsoeapi)
 library(openxlsx)
 library(dplyr)
