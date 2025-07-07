@@ -1,4 +1,4 @@
-name: Run ENTSO-E pipeline scripts          # appears in the Actions list
+name: ENTSO-E Data Downloader          # appears in the Actions list
 
 on:
   push:                                     # every commit / PR
