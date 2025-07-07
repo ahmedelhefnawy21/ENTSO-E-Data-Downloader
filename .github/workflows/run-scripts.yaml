@@ -26,7 +26,8 @@ jobs:
           Rscript -e "install.packages(
                         c('openxlsx', 'dplyr', 'tidyr', 'lubridate',
                           'readxl', 'tibble', 'writexl', 'remotes',
-                          'httr', 'xmlconvert', 'curl'),
+                          'httr', 'xmlconvert', 'curl', 'cachem',
+                          'data.table', 'fs', 'snakecase'),
                         repos = 'https://cloud.r-project.org'
                       )"
           Rscript -e "remotes::install_github(
