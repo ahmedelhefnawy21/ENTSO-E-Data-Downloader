@@ -8,6 +8,7 @@ on:
 
 env:                                        # makes the token visible to R
   ENTSOE_PAT: ${{ secrets.ENTSOE_PAT }}
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   pipeline:
