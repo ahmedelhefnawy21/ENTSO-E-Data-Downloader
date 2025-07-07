@@ -19,15 +19,12 @@ jobs:
       # 1) Set up R (adds /opt/R/4.x to PATH, installs pandoc, etc.)
       - uses: r-lib/actions/setup-r@v2
 
-      # 2) Install and cache R package dependencies
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          deps: false
-          extra-packages: |
-            openxlsx
-            dplyr
-            tidyr
-            lubridate
+      - name: Install CRAN packages
+        run: |
+          Rscript -e "install.packages(c(
+            'openxlsx', 'dplyr', 'tidyr', 'lubridate',
+            'readxl', 'tibble', 'writexl'
+          ), repos='https://cloud.r-project.org')"
 
       - name: Install entsoeapi from GitHub
         run: |
