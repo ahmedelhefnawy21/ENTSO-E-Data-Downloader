@@ -21,14 +21,16 @@ jobs:
 
       - name: Install CRAN packages
         run: |
-          Rscript -e "install.packages(c(
-            'openxlsx', 'dplyr', 'tidyr', 'lubridate',
-            'readxl', 'tibble', 'writexl', 'devtools'
-          ), repos='https://cloud.r-project.org')"
+         Rscript -e "install.packages(c(
+                   'openxlsx', 'dplyr', 'tidyr', 'lubridate',
+                   'readxl',  'tibble', 'writexl', 'remotes'
+                     ), repos = 'https://cloud.r-project.org')"
+
 
       - name: Install entsoeapi from GitHub
         run: |
-          Rscript -e 'devtools::install_github("krose/entsoeapi", ref="master")'
+         Rscript -e "remotes::install_github('krose/entsoeapi', ref = 'master')"
+
 
       # 3) Run each script with a 5-minute safety cap
       - name: Execute pipeline scripts
