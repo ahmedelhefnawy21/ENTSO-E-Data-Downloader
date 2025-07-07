@@ -23,11 +23,15 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-            krose/entsoeapi@v0.8.0.0
             openxlsx
             dplyr
             tidyr
             lubridate
+
+      - name: Install entsoeapi from GitHub
+        run: |
+          Rscript -e 'install.packages("devtools")'
+          Rscript -e 'devtools::install_github("krose/entsoeapi", ref="master")'
 
       # 3) Run each script with a 5-minute safety cap
       - name: Execute pipeline scripts
