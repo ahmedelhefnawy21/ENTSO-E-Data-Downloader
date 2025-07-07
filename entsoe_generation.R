@@ -58,8 +58,6 @@ psr_code_map <- c(
   "Waste"           = "B15"
 )
 
-# ── Set working directory ── #
-setwd("G:/Projekte/HAKE/Papers/InvEndo_TFMM\GAMS\database\data")
 
 # ── API helper ── #
 safe_gen_per_prod_type <- function(eic, start_date, end_date, psr_code) {
